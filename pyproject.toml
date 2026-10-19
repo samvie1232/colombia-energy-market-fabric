@@ -1,0 +1,32 @@
+[project]
+name = "energia-xm"
+version = "0.1.0"
+description = "Lógica de ingesta y transformación del mercado eléctrico colombiano (XM) para Microsoft Fabric"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["requests>=2.31"]
+
+[project.optional-dependencies]
+spark = ["pyspark==3.5.3"]
+dev = ["pytest>=8", "ruff>=0.6", "pyspark==3.5.3"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["spark: pruebas que levantan una sesión local de Spark (más lentas)"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+# fabric/ lo genera la integración Git de Fabric (notebooks con spark/notebookutils implícitos);
+# notebooks/ son las copias .ipynb de importación.
+extend-exclude = ["fabric", "notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
