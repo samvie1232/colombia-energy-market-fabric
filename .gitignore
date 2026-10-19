@@ -1,0 +1,9 @@
+# Windows al copiar desde el Explorador
+*:Zone.Identifier
+*Zone.Identifier
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
