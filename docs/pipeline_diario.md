@@ -14,8 +14,8 @@ en rojo en **Supervisión** señalando la actividad que falló.
 - **Reintentos:** cada actividad reintenta 2 veces con 5 minutos de espera (la API de XM a veces responde lento).
 - **Espera de 2 minutos:** Gold lee Silver por el punto de conexión SQL del Lakehouse, que tarda un poco en ver
   los datos nuevos de Delta. Mejora futura: llamar a la API `refreshMetadata` del punto SQL en lugar de esperar.
-- **Aviso de falla:** la corrida queda en rojo en *Supervisión*. El correo se conecta el Día 4 con Activator (eventos de trabajos de Fabric), porque el tenant de prueba
-  no tiene buzón de Outlook para la actividad de Office 365.
+- **Aviso de falla:** la programación tiene *Notificaciones de error* por correo para las corridas programadas
+  (no hace falta la actividad de Office 365, que necesita un buzón que el tenant de prueba no tiene).
 
 ## Paso a paso
 
@@ -73,7 +73,8 @@ Conecta **Esperar SQL → Gold** con la flecha verde.
 los 5 minutos: usar el botón de actualizar junto al Id. de ejecución.
 
 ### 8. Programar
-**Programar** → Activado → Repetir **Diario** → hora **07:00** → zona horaria **(UTC-05:00) Bogotá, Lima, Quito**.
+**Programación** → **Notificaciones de error**: correo propio → **Agregar programación** → Corregido, Repetir **Diaria**,
+hora **07:00**, fin **17/12/2026** (vence la prueba de Fabric), zona **(UTC-05:00) Bogotá, Lima, Quito** → **Guardar**.
 XM publica con 1 a 3 días de retraso, así que la hora exacta no es crítica; la ventana de 7 días cubre los atrasos.
 
 ### 9. Versionar

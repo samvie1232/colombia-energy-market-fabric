@@ -1,0 +1,60 @@
+// Medidas del modelo sm_energia (Direct Lake sobre wh_energia, esquema gold).
+// Se pegan en la Vista de consultas DAX y se agregan con "Actualizar modelo con cambios".
+DEFINE
+    // ---------------------------------------------------------------- precio y demanda
+    MEASURE fct_precio_hora[Precio bolsa promedio] =
+        AVERAGE ( fct_precio_hora[precio_bolsa_cop_kwh] )
+    MEASURE fct_precio_hora[Precio bolsa ponderado] =
+        DIVIDE (
+            SUMX ( fct_precio_hora, fct_precio_hora[precio_bolsa_cop_kwh] * fct_precio_hora[demanda_kwh] ),
+            SUM ( fct_precio_hora[demanda_kwh] )
+        )
+    MEASURE fct_precio_hora[Precio bolsa máximo] =
+        MAX ( fct_precio_hora[precio_bolsa_cop_kwh] )
+    MEASURE fct_precio_hora[Precio escasez] =
+        AVERAGE ( fct_precio_hora[precio_escasez_cop_kwh] )
+    MEASURE fct_precio_hora[Horas sobre escasez] =
+        CALCULATE ( COUNTROWS ( fct_precio_hora ), fct_precio_hora[sobre_escasez] = TRUE () )
+    MEASURE fct_precio_hora[Precio mes anterior] =
+        CALCULATE ( [Precio bolsa promedio], DATEADD ( dim_fecha[fecha], -1, MONTH ) )
+    MEASURE fct_precio_hora[Variación precio vs mes anterior] =
+        DIVIDE ( [Precio bolsa promedio] - [Precio mes anterior], [Precio mes anterior] )
+    MEASURE fct_precio_hora[Demanda GWh] =
+        DIVIDE ( SUM ( fct_precio_hora[demanda_kwh] ), 1000000 )
+    MEASURE fct_precio_hora[Última fecha con precio] =
+        MAXX ( fct_precio_hora, RELATED ( dim_fecha[fecha] ) )
+    // ---------------------------------------------------------------- generación
+    MEASURE fct_generacion_hora[Generación GWh] =
+        DIVIDE ( SUM ( fct_generacion_hora[generacion_kwh] ), 1000000 )
+    MEASURE fct_generacion_hora[Participación generación] =
+        DIVIDE ( [Generación GWh], CALCULATE ( [Generación GWh], ALL ( dim_recurso ) ) )
+    MEASURE fct_generacion_hora[Participación hidráulica] =
+        DIVIDE (
+            CALCULATE ( [Generación GWh], dim_recurso[tecnologia] = "Hidráulica" ),
+            CALCULATE ( [Generación GWh], ALL ( dim_recurso ) )
+        )
+    // ---------------------------------------------------------------- embalses y aportes
+    // Semiaditiva: el volumen no se suma en el tiempo, se toma el último día con dato.
+    MEASURE fct_embalse_dia[Volumen útil GWh] =
+        VAR ultima = MAX ( fct_embalse_dia[fecha_key] )
+        RETURN
+            DIVIDE (
+                CALCULATE ( SUM ( fct_embalse_dia[volumen_util_kwh] ), fct_embalse_dia[fecha_key] = ultima ),
+                1000000
+            )
+    MEASURE fct_sistema_dia[Aportes GWh] =
+        DIVIDE ( SUM ( fct_sistema_dia[aportes_kwh] ), 1000000 )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    dim_fecha[anio],
+    "Precio promedio", [Precio bolsa promedio],
+    "Precio ponderado", [Precio bolsa ponderado],
+    "Horas sobre escasez", [Horas sobre escasez],
+    "Demanda GWh", [Demanda GWh],
+    "Generación GWh", [Generación GWh],
+    "Participación hidráulica", [Participación hidráulica],
+    "Volumen útil GWh", [Volumen útil GWh],
+    "Aportes GWh", [Aportes GWh]
+)
+ORDER BY dim_fecha[anio]
