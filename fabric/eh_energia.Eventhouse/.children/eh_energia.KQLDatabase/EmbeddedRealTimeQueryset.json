@@ -1,0 +1,22 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "62da0a5a-b6a1-4de2-8ddd-923d2c26288e",
+        "clusterUri": "https://trd-7w0pq6r0cczueg1fm5.z4.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "7dee9c80-5153-4333-9d79-f72ff85c9504"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "52cf2505-b787-485d-b704-9e8a784228c2",
+        "content": "precio_bolsa_rt\n| summarize horas = count(), precio_max = max(precio_bolsa_cop_kwh), horas_sobre_escasez = countif(tostring(sobre_escasez) == \"true\") by fecha, origen",
+        "title": "Tab",
+        "dataSourceId": "62da0a5a-b6a1-4de2-8ddd-923d2c26288e"
+      }
+    ],
+    "querysetType": "Embedded"
+  }
+}

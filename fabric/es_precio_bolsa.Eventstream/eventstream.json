@@ -1,0 +1,127 @@
+{
+  "sources": [
+    {
+      "id": "1694168a-da32-4d34-b940-55cb75c3759a",
+      "name": "src_cuaderno",
+      "type": "CustomEndpoint",
+      "properties": {}
+    }
+  ],
+  "destinations": [
+    {
+      "id": "8335ba36-e58b-478c-b9fc-78762d0c2d35",
+      "name": "Eventhouse",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "f85c9504-f72f-9d79-4333-51537dee9c80",
+        "databaseName": "eh_energia",
+        "tableName": "precio_bolsa_rt",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "es_precio_bolsa-stream"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "es_precio_bolsa-stream",
+          "schema": {
+            "columns": [
+              {
+                "name": "fecha",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "hora",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "ts_colombia",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "ts_utc",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "precio_bolsa_cop_kwh",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "precio_escasez_cop_kwh",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "sobre_escasez",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "origen",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "faa50192-ce63-5955-b395-201ce34755e4",
+      "name": "OQNtIzKiNdazi8---waG6d-8bf6d5f6-f4f4-4c73-ba9e-a7d06dcc1036",
+      "type": "Activator",
+      "properties": {
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "6dcc1036-a7d0-ba9e-4c73-f4f48bf6d5f6",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "es_precio_bolsa-stream"
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "f6a3c81f-dd7d-4bb8-b960-cd03e6a0b3b2",
+      "name": "es_precio_bolsa-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "src_cuaderno"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}

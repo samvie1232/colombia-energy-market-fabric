@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Reflex",
+    "displayName": "act_precio_bolsa",
+    "description": "Reflex Project created from Trigger Pane"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6dcc1036-a7d0-ba9e-4c73-f4f48bf6d5f6"
+  }
+}
