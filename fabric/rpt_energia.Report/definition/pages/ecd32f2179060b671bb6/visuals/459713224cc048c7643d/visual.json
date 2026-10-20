@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "459713224cc048c7643d",
+  "position": {
+    "x": 1539.7402597402597,
+    "y": 43.636363636363633,
+    "z": 4,
+    "height": 280,
+    "width": 280,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_precio_hora"
+                    }
+                  },
+                  "Property": "Última fecha con precio"
+                }
+              },
+              "queryRef": "fct_precio_hora.Última fecha con precio",
+              "nativeQueryRef": "Última fecha con precio"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fct_precio_hora"
+                  }
+                },
+                "Property": "Última fecha con precio"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "61bd05146a688946c82e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_precio_hora"
+              }
+            },
+            "Property": "Última fecha con precio"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

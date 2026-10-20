@@ -1,0 +1,55 @@
+table dim_hora
+	lineageTag: 639cb6aa-8f98-4aaf-ba20-89d6da4adb37
+	sourceLineageTag: [gold].[dim_hora]
+
+	column hora_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 36981276-aa9d-4842-a8b6-d7ef4a0fc148
+		sourceLineageTag: hora_key
+		summarizeBy: none
+		sourceColumn: hora_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora_texto
+		dataType: string
+		sourceProviderType: char
+		lineageTag: 37983d1c-a7ff-413c-b00b-1c1239ab3c7f
+		sourceLineageTag: hora_texto
+		summarizeBy: none
+		sourceColumn: hora_texto
+
+		annotation SummarizationSetBy = Automatic
+
+	column franja
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 4274e4d3-8866-4fd8-a40f-8572c5be7e45
+		sourceLineageTag: franja
+		summarizeBy: none
+		sourceColumn: franja
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_hora_punta
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: dd217e62-a1ce-430a-804c-50364261c1ad
+		sourceLineageTag: es_hora_punta
+		summarizeBy: none
+		sourceColumn: es_hora_punta
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_hora = entity
+		mode: directLake
+		source
+			entityName: dim_hora
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

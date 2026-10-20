@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "c4149e30486de56169e2",
+  "position": {
+    "x": 887.741935483871,
+    "y": 377.96526054590572,
+    "z": 6,
+    "height": 322.38213399503724,
+    "width": 932.20843672456579,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_fecha"
+                    }
+                  },
+                  "Property": "anio"
+                }
+              },
+              "queryRef": "dim_fecha.anio",
+              "nativeQueryRef": "anio",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_recurso"
+                    }
+                  },
+                  "Property": "tecnologia"
+                }
+              },
+              "queryRef": "dim_recurso.tecnologia",
+              "nativeQueryRef": "tecnologia"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_generacion_hora"
+                    }
+                  },
+                  "Property": "Generación GWh"
+                }
+              },
+              "queryRef": "fct_generacion_hora.Generación GWh",
+              "nativeQueryRef": "Generación GWh"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fct_generacion_hora"
+                  }
+                },
+                "Property": "Generación GWh"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8e23ef886b7f61bf11bc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_fecha"
+              }
+            },
+            "Property": "anio"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4f0bb84d357203ffc772",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_generacion_hora"
+              }
+            },
+            "Property": "Generación GWh"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "44a73a78c8453f0bbfbe",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_recurso"
+              }
+            },
+            "Property": "tecnologia"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

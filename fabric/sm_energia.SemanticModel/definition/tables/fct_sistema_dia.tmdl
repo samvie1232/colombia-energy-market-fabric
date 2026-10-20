@@ -1,0 +1,137 @@
+table fct_sistema_dia
+	lineageTag: a128c69d-8248-498b-8fc6-7e12d50a86fa
+	sourceLineageTag: [gold].[fct_sistema_dia]
+
+	measure 'Aportes GWh' = ```
+			
+			        DIVIDE ( SUM ( fct_sistema_dia[aportes_kwh] ), 1000000 )
+			```
+		formatString: #,0
+		lineageTag: bc0be4c5-a1dd-4658-b1eb-71f1efd63c4c
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e0b5ffe0-de43-4fdf-8ecf-c45036c20092
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_bolsa_prom_cop_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: a9bad40c-35df-4614-bcc8-710b9fcf5f04
+		sourceLineageTag: precio_bolsa_prom_cop_kwh
+		summarizeBy: sum
+		sourceColumn: precio_bolsa_prom_cop_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column precio_bolsa_max_cop_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: dc02e6c1-3d8a-4c91-a92e-fa7c189a1b89
+		sourceLineageTag: precio_bolsa_max_cop_kwh
+		summarizeBy: sum
+		sourceColumn: precio_bolsa_max_cop_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column precio_escasez_cop_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: f8af5b61-d2c0-4aeb-a97f-7875e29bcdda
+		sourceLineageTag: precio_escasez_cop_kwh
+		summarizeBy: sum
+		sourceColumn: precio_escasez_cop_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column horas_sobre_escasez
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 083693a0-8b3b-4781-b9d2-15bba6f6ec86
+		sourceLineageTag: horas_sobre_escasez
+		summarizeBy: sum
+		sourceColumn: horas_sobre_escasez
+
+		annotation SummarizationSetBy = Automatic
+
+	column demanda_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 2160b5b2-dd6e-422d-ad91-79371226b1bf
+		sourceLineageTag: demanda_kwh
+		summarizeBy: sum
+		sourceColumn: demanda_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column generacion_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 83aa4cdd-e64a-4411-9675-baf24350eb06
+		sourceLineageTag: generacion_kwh
+		summarizeBy: sum
+		sourceColumn: generacion_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column volumen_util_total_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: edf3dd0d-84ef-417d-8a76-9cdd4fdfacf9
+		sourceLineageTag: volumen_util_total_kwh
+		summarizeBy: sum
+		sourceColumn: volumen_util_total_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column aportes_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: b6589d07-b4ad-41cb-aec9-70a348345304
+		sourceLineageTag: aportes_kwh
+		summarizeBy: sum
+		sourceColumn: aportes_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition fct_sistema_dia = entity
+		mode: directLake
+		source
+			entityName: fct_sistema_dia
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

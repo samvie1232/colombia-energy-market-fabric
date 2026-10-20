@@ -1,0 +1,184 @@
+table fct_precio_hora
+	lineageTag: 32db3dbc-a535-4c08-b48a-e796a2abdf9e
+	sourceLineageTag: [gold].[fct_precio_hora]
+
+	measure 'Precio bolsa promedio' = ```
+			
+			        AVERAGE ( fct_precio_hora[precio_bolsa_cop_kwh] )
+			```
+		formatString: #,0.0
+		lineageTag: 13e66fb5-0822-4039-b039-a5ed9d95a6d0
+
+		changedProperty = FormatString
+
+	measure 'Precio bolsa ponderado' = ```
+			
+			        DIVIDE (
+			            SUMX ( fct_precio_hora, fct_precio_hora[precio_bolsa_cop_kwh] * fct_precio_hora[demanda_kwh] ),
+			            SUM ( fct_precio_hora[demanda_kwh] )
+			        )
+			```
+		formatString: #,0.0
+		lineageTag: 8f07b287-073e-48a0-bbfc-0b6762491508
+
+		changedProperty = FormatString
+
+	measure 'Precio bolsa máximo' = ```
+			
+			        MAX ( fct_precio_hora[precio_bolsa_cop_kwh] )
+			```
+		formatString: #,0.0
+		lineageTag: e07e2328-7301-4876-b813-26053244ea85
+
+		changedProperty = FormatString
+
+	measure 'Precio escasez' = ```
+			
+			        AVERAGE ( fct_precio_hora[precio_escasez_cop_kwh] )
+			```
+		formatString: #,0.0
+		lineageTag: 1837d6a0-d101-424d-96f5-367550c11337
+
+		changedProperty = FormatString
+
+	measure 'Horas sobre escasez' = ```
+			
+			        CALCULATE ( COUNTROWS ( fct_precio_hora ), fct_precio_hora[sobre_escasez] = TRUE () )
+			```
+		formatString: #,0
+		lineageTag: f3606253-b457-4b7e-8130-b83680287385
+
+		changedProperty = FormatString
+
+	measure 'Precio mes anterior' = ```
+			
+			        CALCULATE ( [Precio bolsa promedio], DATEADD ( dim_fecha[fecha], -1, MONTH ) )
+			```
+		formatString: #,0.0
+		lineageTag: af6fcf2a-34ed-4c65-bd83-275801833aed
+
+		changedProperty = FormatString
+
+	measure 'Variación precio vs mes anterior' = ```
+			
+			        DIVIDE ( [Precio bolsa promedio] - [Precio mes anterior], [Precio mes anterior] )
+			```
+		formatString: 0.0%
+		lineageTag: 49e1d39c-1ab8-4e33-806f-915e548492f6
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Demanda GWh' = ```
+			
+			        DIVIDE ( SUM ( fct_precio_hora[demanda_kwh] ), 1000000 )
+			```
+		formatString: #,0
+		lineageTag: b15e8fc2-4dee-4bf9-9e15-6321fe03f528
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Última fecha con precio' = ```
+			
+			        MAXX ( fct_precio_hora, RELATED ( dim_fecha[fecha] ) )
+			```
+		formatString: Short Date
+		lineageTag: 676937f0-21ff-43d6-ba3d-5858dd5222eb
+
+		changedProperty = FormatString
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 821f8da0-bcca-4327-a1e8-232707a2f6ca
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 6c3bb8d4-8378-4d2e-924d-5fdf5d00d047
+		sourceLineageTag: hora_key
+		summarizeBy: none
+		sourceColumn: hora_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts_utc
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b71d7cc1-26f0-49c4-8717-dbee78af4cd9
+		sourceLineageTag: ts_utc
+		summarizeBy: none
+		sourceColumn: ts_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_bolsa_cop_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 10c668f1-3a5c-47af-9b7b-3b193e25726f
+		sourceLineageTag: precio_bolsa_cop_kwh
+		summarizeBy: sum
+		sourceColumn: precio_bolsa_cop_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column demanda_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 4f015df7-9e49-46c9-b9d7-0113b577350b
+		sourceLineageTag: demanda_kwh
+		summarizeBy: sum
+		sourceColumn: demanda_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column precio_escasez_cop_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 691efb79-a166-480a-bc13-2638977b1356
+		sourceLineageTag: precio_escasez_cop_kwh
+		summarizeBy: sum
+		sourceColumn: precio_escasez_cop_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column sobre_escasez
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e6d01749-af1f-488c-8582-8f86e69b401d
+		sourceLineageTag: sobre_escasez
+		summarizeBy: none
+		sourceColumn: sobre_escasez
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_precio_hora = entity
+		mode: directLake
+		source
+			entityName: fct_precio_hora
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

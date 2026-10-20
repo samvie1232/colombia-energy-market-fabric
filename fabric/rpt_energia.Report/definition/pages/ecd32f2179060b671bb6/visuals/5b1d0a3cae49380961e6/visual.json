@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "5b1d0a3cae49380961e6",
+  "position": {
+    "x": 1198.4415584415583,
+    "y": 43.636363636363633,
+    "z": 3,
+    "height": 280,
+    "width": 280,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_precio_hora"
+                    }
+                  },
+                  "Property": "Horas sobre escasez"
+                }
+              },
+              "queryRef": "fct_precio_hora.Horas sobre escasez",
+              "nativeQueryRef": "Horas sobre escasez"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fct_precio_hora"
+                  }
+                },
+                "Property": "Horas sobre escasez"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5cc3f6cf18889b16d5ee",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_precio_hora"
+              }
+            },
+            "Property": "Horas sobre escasez"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

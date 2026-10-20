@@ -1,0 +1,94 @@
+table fct_generacion_hora
+	lineageTag: bed52374-982e-482b-81db-654cdc13c537
+	sourceLineageTag: [gold].[fct_generacion_hora]
+
+	measure 'Generación GWh' = ```
+			
+			        DIVIDE ( SUM ( fct_generacion_hora[generacion_kwh] ), 1000000 )
+			```
+		formatString: #,0
+		lineageTag: 5aab536f-75d6-4a69-ad32-783287213af3
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Participación generación' = ```
+			
+			        DIVIDE ( [Generación GWh], CALCULATE ( [Generación GWh], ALL ( dim_recurso ) ) )
+			```
+		formatString: 0.0%
+		lineageTag: c50b9aa8-f6bf-4e6b-abc9-dd3eb7ce75e9
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Participación hidráulica' = ```
+			
+			        DIVIDE (
+			            CALCULATE ( [Generación GWh], dim_recurso[tecnologia] = "Hidráulica" ),
+			            CALCULATE ( [Generación GWh], ALL ( dim_recurso ) )
+			        )
+			```
+		formatString: 0.0%
+		lineageTag: fac25c88-1fd0-4fdc-a29e-c1033aa94fb8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a9cb0148-018a-4290-81fe-55629c4b2a7e
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: smallint
+		lineageTag: 1c7d3e81-1178-4160-a664-296fe80dc70e
+		sourceLineageTag: hora_key
+		summarizeBy: none
+		sourceColumn: hora_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column recurso_key
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: e1aeab23-41ea-471a-a472-1530d81794ec
+		sourceLineageTag: recurso_key
+		summarizeBy: none
+		sourceColumn: recurso_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column generacion_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 7bb01ca9-df3a-4a86-907a-c1499714db4c
+		sourceLineageTag: generacion_kwh
+		summarizeBy: sum
+		sourceColumn: generacion_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition fct_generacion_hora = entity
+		mode: directLake
+		source
+			entityName: fct_generacion_hora
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

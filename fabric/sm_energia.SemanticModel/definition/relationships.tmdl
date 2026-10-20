@@ -1,0 +1,28 @@
+relationship e984502e-e26f-a692-ac1f-7617bf90ab75
+	fromColumn: fct_precio_hora.fecha_key
+	toColumn: dim_fecha.fecha_key
+
+relationship 52c18a55-e7a9-551a-59cc-3f198dd557a0
+	fromColumn: fct_precio_hora.hora_key
+	toColumn: dim_hora.hora_key
+
+relationship 652112c6-8173-fb53-4939-268b963bf0ac
+	fromColumn: fct_generacion_hora.fecha_key
+	toColumn: dim_fecha.fecha_key
+
+relationship 9cdc8f5b-41ba-8b39-21f5-b8749a0448b0
+	fromColumn: fct_generacion_hora.hora_key
+	toColumn: dim_hora.hora_key
+
+relationship bf76cb70-42c7-0a06-c4f6-32e658c48d9f
+	fromColumn: fct_generacion_hora.recurso_key
+	toColumn: dim_recurso.recurso_key
+
+relationship df8dd2c1-3ede-f0fc-24e1-aa03dfdbc55e
+	fromColumn: fct_embalse_dia.fecha_key
+	toColumn: dim_fecha.fecha_key
+
+relationship e5256e32-dc1e-214a-b4f0-58bcbc57adf6
+	fromColumn: fct_sistema_dia.fecha_key
+	toColumn: dim_fecha.fecha_key
+

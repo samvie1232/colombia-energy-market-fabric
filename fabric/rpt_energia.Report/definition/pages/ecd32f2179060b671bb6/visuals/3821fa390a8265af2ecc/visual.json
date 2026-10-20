@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "3821fa390a8265af2ecc",
+  "position": {
+    "x": 475.15903801396428,
+    "y": 43.196276183087662,
+    "z": 1,
+    "height": 280,
+    "width": 280,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_precio_hora"
+                    }
+                  },
+                  "Property": "Precio bolsa ponderado"
+                }
+              },
+              "queryRef": "fct_precio_hora.Precio bolsa ponderado",
+              "nativeQueryRef": "Precio bolsa ponderado"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fct_precio_hora"
+                  }
+                },
+                "Property": "Precio bolsa ponderado"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2abd3737fde8a2475cf3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_precio_hora"
+              }
+            },
+            "Property": "Precio bolsa ponderado"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

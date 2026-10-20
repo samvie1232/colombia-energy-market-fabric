@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "425fe9dfd6f32748141c",
+  "position": {
+    "x": 887.741935483871,
+    "y": 719.40446650124079,
+    "z": 7,
+    "height": 319.20595533498761,
+    "width": 932.20843672456579,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_fecha"
+                    }
+                  },
+                  "Property": "fecha"
+                }
+              },
+              "queryRef": "dim_fecha.fecha",
+              "nativeQueryRef": "fecha",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_embalse_dia"
+                    }
+                  },
+                  "Property": "Volumen útil GWh"
+                }
+              },
+              "queryRef": "fct_embalse_dia.Volumen útil GWh",
+              "nativeQueryRef": "Volumen útil GWh"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_fecha"
+                  }
+                },
+                "Property": "fecha"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "032e90ea637a613c4c97",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_fecha"
+              }
+            },
+            "Property": "fecha"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "49f2491847b23ef4834d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_embalse_dia"
+              }
+            },
+            "Property": "Volumen útil GWh"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

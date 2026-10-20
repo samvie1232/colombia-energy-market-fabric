@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation PBI_ProTooling = ["WebModelingEdit","DaxQueryView_Desktop"]
+
+ref table dim_fecha
+ref table dim_hora
+ref table dim_recurso
+ref table fct_precio_hora
+ref table fct_generacion_hora
+ref table fct_embalse_dia
+ref table fct_sistema_dia
+

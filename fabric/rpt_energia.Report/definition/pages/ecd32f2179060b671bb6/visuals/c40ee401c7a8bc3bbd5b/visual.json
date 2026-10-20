@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "c40ee401c7a8bc3bbd5b",
+  "position": {
+    "x": 819.74025974025972,
+    "y": 43.636363636363633,
+    "z": 2,
+    "height": 280,
+    "width": 280,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_precio_hora"
+                    }
+                  },
+                  "Property": "Demanda GWh"
+                }
+              },
+              "queryRef": "fct_precio_hora.Demanda GWh",
+              "nativeQueryRef": "Demanda GWh"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fct_precio_hora"
+                  }
+                },
+                "Property": "Demanda GWh"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7e86381b201bb0080a5e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_precio_hora"
+              }
+            },
+            "Property": "Demanda GWh"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

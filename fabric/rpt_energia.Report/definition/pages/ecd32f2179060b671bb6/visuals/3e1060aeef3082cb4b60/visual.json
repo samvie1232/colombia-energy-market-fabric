@@ -1,0 +1,135 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "3e1060aeef3082cb4b60",
+  "position": {
+    "x": 101.6377171215881,
+    "y": 449.42928039702235,
+    "z": 5,
+    "height": 501.83622828784121,
+    "width": 770.22332506203475,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_fecha"
+                    }
+                  },
+                  "Property": "fecha"
+                }
+              },
+              "queryRef": "dim_fecha.fecha",
+              "nativeQueryRef": "fecha",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_precio_hora"
+                    }
+                  },
+                  "Property": "Precio bolsa ponderado"
+                }
+              },
+              "queryRef": "fct_precio_hora.Precio bolsa ponderado",
+              "nativeQueryRef": "Precio bolsa ponderado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_precio_hora"
+                    }
+                  },
+                  "Property": "Precio escasez"
+                }
+              },
+              "queryRef": "fct_precio_hora.Precio escasez",
+              "nativeQueryRef": "Precio escasez"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_fecha"
+                  }
+                },
+                "Property": "fecha"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "275ab45112e0c9fd471e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_fecha"
+              }
+            },
+            "Property": "fecha"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "bfc43bed8d6c586579a7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_precio_hora"
+              }
+            },
+            "Property": "Precio bolsa ponderado"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "86ceead383908390a02f",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_precio_hora"
+              }
+            },
+            "Property": "Precio escasez"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

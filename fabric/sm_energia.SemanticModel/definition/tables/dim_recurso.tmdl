@@ -1,0 +1,115 @@
+table dim_recurso
+	lineageTag: 24379cd8-b9aa-4883-acef-e00714b1d043
+	sourceLineageTag: [gold].[dim_recurso]
+
+	column recurso_key
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: b2954344-b81a-42cb-a247-67d6aecf491f
+		sourceLineageTag: recurso_key
+		summarizeBy: none
+		sourceColumn: recurso_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		sourceProviderType: varchar(200)
+		lineageTag: b3c99dce-49b3-40ad-9612-f4f6cf9be2e5
+		sourceLineageTag: nombre
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column tecnologia
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 6e06c08d-b45a-4826-bd44-c26359402a6d
+		sourceLineageTag: tecnologia
+		summarizeBy: none
+		sourceColumn: tecnologia
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente_energia
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: fffbabe2-5357-4a12-93c0-5b831a4c1bde
+		sourceLineageTag: fuente_energia
+		summarizeBy: none
+		sourceColumn: fuente_energia
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_despacho
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 29542abe-b1b7-44d0-975c-06267910a90f
+		sourceLineageTag: tipo_despacho
+		summarizeBy: none
+		sourceColumn: tipo_despacho
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_recurso
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: b38bd39c-b6a8-40b5-bbfc-fc8fb7242ab1
+		sourceLineageTag: tipo_recurso
+		summarizeBy: none
+		sourceColumn: tipo_recurso
+
+		annotation SummarizationSetBy = Automatic
+
+	column agente
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 7ddc6be9-5e91-43b8-99a9-a6bbb4100d4a
+		sourceLineageTag: agente
+		summarizeBy: none
+		sourceColumn: agente
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 16611b39-215a-4a1b-9fde-459586fc3a41
+		sourceLineageTag: estado
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_inicio_operacion
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: a9df4dab-ce11-4813-bbe4-75e684757165
+		sourceLineageTag: fecha_inicio_operacion
+		summarizeBy: none
+		sourceColumn: fecha_inicio_operacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column en_listado_xm
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 3a4ef496-398b-4ed8-890e-ff2e15870651
+		sourceLineageTag: en_listado_xm
+		summarizeBy: none
+		sourceColumn: en_listado_xm
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_recurso = entity
+		mode: directLake
+		source
+			entityName: dim_recurso
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

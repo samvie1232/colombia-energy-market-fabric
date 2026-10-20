@@ -1,0 +1,61 @@
+table fct_embalse_dia
+	lineageTag: fc9901f3-ed3b-486e-9834-115e5054fc0b
+	sourceLineageTag: [gold].[fct_embalse_dia]
+
+	measure 'Volumen útil GWh' = ```
+			
+			        VAR ultima = MAX ( fct_embalse_dia[fecha_key] )
+			        RETURN
+			            DIVIDE (
+			                CALCULATE ( SUM ( fct_embalse_dia[volumen_util_kwh] ), fct_embalse_dia[fecha_key] = ultima ),
+			                1000000
+			            )
+			```
+		formatString: #,0.0
+		lineageTag: f0241fab-8e7e-4d60-a73a-48409aa2f27f
+
+		changedProperty = FormatString
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a73e146c-b96f-4146-8b9b-ebe137edb9e1
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column embalse
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 7f078c6e-a48f-4f36-a32c-e7113ec22988
+		sourceLineageTag: embalse
+		summarizeBy: none
+		sourceColumn: embalse
+
+		annotation SummarizationSetBy = Automatic
+
+	column volumen_util_kwh
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(18, 4)
+		lineageTag: 5fcc6ebb-6044-49ba-b5c1-a79c655b8081
+		sourceLineageTag: volumen_util_kwh
+		summarizeBy: sum
+		sourceColumn: volumen_util_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition fct_embalse_dia = entity
+		mode: directLake
+		source
+			entityName: fct_embalse_dia
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
