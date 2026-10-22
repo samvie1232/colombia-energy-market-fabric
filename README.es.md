@@ -1,5 +1,7 @@
 # Mercado eléctrico colombiano en Microsoft Fabric
 
+[![CI](https://github.com/samvie1232/colombia-energy-market-fabric/actions/workflows/ci.yml/badge.svg)](https://github.com/samvie1232/colombia-energy-market-fabric/actions/workflows/ci.yml) ![License](https://img.shields.io/badge/license-MIT-green) ![Microsoft Fabric](https://img.shields.io/badge/Microsoft%20Fabric-DP--700-0078D4)
+
 Español · [English](README.md)
 
 Plataforma de datos de punta a punta en **Microsoft Fabric** que carga a diario los datos del mercado eléctrico
